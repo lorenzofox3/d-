@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "test": "rollup -c ./test/rollup.config.js && node ./test/dist/index.js"
+    "dev": "rollup -c --watch",
+    "test": "rollup -c ./test/rollup.config.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,8 @@
     "zora": "^0.3.0"
   },
   "dependencies": {
-    "rollup-plugin-replace": "^1.1.1"
+    "github-api": "^3.0.0",
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-watch": "^3.2.2"
   }
 }

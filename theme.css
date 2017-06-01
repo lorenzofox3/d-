@@ -6,7 +6,8 @@
     --grid-gap-row: 0.5em;
     --grid-gap-column: 0.5em;
     --dashed-color: #bfbfbf;
-    --panel-color:white;
+    --panel-color: white;
+    --highlight-color: #6963e6;
 
     /*
     functional
@@ -47,6 +48,8 @@ main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
 }
 
 .adorner-layer {
@@ -80,7 +83,7 @@ main {
 }
 
 .empty-panel > button {
-    /*transition: all 0.4s;*/
+    transition: all 0.3s;
     padding: 0.5em 1em;
     background: inherit;
     color: var(--dashed-color);
@@ -90,7 +93,7 @@ main {
 
 .empty-panel:hover {
     --border-width: 2px;
-    --dashed-color: blue;
+    --dashed-color: var(--highlight-color);
 }
 
 .resize-handle {
@@ -101,7 +104,7 @@ main {
     right: calc(-1 * var(--border-width, 1px));
     bottom: calc(-1 * var(--border-width, 1px));
     cursor: se-resize;
-    background-image: linear-gradient(-45deg, var(--dashed-color) 1.2em, transparent 1.2em);
+    background-image: linear-gradient(-45deg, var(--dashed-color) 1.4em, transparent 1.4em);
 }
 
 .empty-panel:hover > button {
@@ -112,7 +115,7 @@ main {
     background: lightgreen;
 }
 
-.invalid-panel{
+.invalid-panel {
     background: orangered;
 }
 

@@ -1,5 +1,5 @@
 import zora from 'zora';
-import {indexFromDef, defFromIndex, valuesFromDef, AreaFactory} from '../src/grid';
+import {indexFromDef, defFromIndex, valuesFromDef, AreaFactory} from '../src/lib/grid';
 
 export default zora()
   .test('indexFromIndex', function * (t) {

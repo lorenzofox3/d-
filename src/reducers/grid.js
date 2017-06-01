@@ -1,6 +1,14 @@
-import {Grid} from './grid';
+import {Grid} from '../lib/grid';
 
-export default (grid = Grid()) => (state, action) => {
+// const state = {
+//  panels:[ ... {
+//     x, y, dx, dy, adornerStatus:0
+//  }],
+//  active:{x,y}
+// }
+
+
+export default (grid = Grid()) => (state = {active: null, panels: [...grid]}, action) => {
   switch (action.type) {
     case 'START_RESIZE': {
       const {x, y}=action;
@@ -35,6 +43,7 @@ export default (grid = Grid()) => (state, action) => {
         for (let {x, y} of invalidCellsArea) {
           grid.updateAt(x, y, {adornerStatus: -1});
         }
+
         return Object.assign({}, state, {panels: [...grid]});
       } else {
         return state;
@@ -73,9 +82,9 @@ export default (grid = Grid()) => (state, action) => {
         panels: [...grid],
         active: null
       });
-
     }
     default:
       return state;
   }
 };
+

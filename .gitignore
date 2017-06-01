@@ -57,3 +57,6 @@ typings/
 # dotenv environment variables file
 .env
 
+test/dist/index.html
+test/dist/index.js
+

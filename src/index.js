@@ -7,9 +7,11 @@ import subscribe from './containers/panel';
 import AdornerPanel from './components/AdornerPanel';
 import DataPanel from './components/DataPanel';
 import {ROWS, COLUMNS} from './lib/const';
+import Modal from './components/Modal';
+import connectModal from './containers/modal';
 
 //todo: find  this from server etc
-const grid = Grid({rows:ROWS, columns:COLUMNS});
+const grid = Grid({rows: ROWS, columns: COLUMNS});
 const initialState = {
   grid: {
     panels: [...grid],
@@ -23,6 +25,8 @@ const actions = {
   resizeOver: (arg) => store.dispatch(actionCreators.resizeOver(arg)),
   endResize: (arg) => store.dispatch(actionCreators.endResize(arg)),
   startResize: (arg) => store.dispatch(actionCreators.startResize(arg)),
+  openModal: (args) => store.dispatch(actionCreators.openModal(args)),
+  closeModal: (args) => store.dispatch(actionCreators.closeModal(args))
 };
 
 const onDragResize = (x, y) => ev => {
@@ -31,11 +35,21 @@ const onDragResize = (x, y) => ev => {
   actions.startResize({x, y});
 };
 
+const onClickOpenModal = (x, y) => ev => {
+  actions.openModal({x, y, title:'Create new data panel', modalType:'newDataPanel'});
+};
+
 const ResizableDataPanel = (props) => {
   const {x, y} = props;
   const onDragStart = onDragResize(x, y);
-  return <DataPanel onDragStart={onDragStart} {...props} ></DataPanel>
+  const onClick = onClickOpenModal(x, y);
+  return <DataPanel onDragStart={onDragStart} onClick={onClick} {...props} ></DataPanel>
 };
+
+const SideModal = connectModal(store, actions)(props => {
+  return (<Modal closeModal={actions.closeModal} {...props} ></Modal>);
+});
+
 
 const getCoordsFromMouseEvent = (columns, rows) => (ev) => {
   const {currentTarget, offsetX, offsetY} = ev;
@@ -78,6 +92,7 @@ const Container = ({panels}) => {
       const {x, y} = coords(ev);
       actions.endResize(({x, startX, y, startY}));
     }
+    ev.preventDefault();
   };
 
   return (
@@ -92,6 +107,7 @@ const Container = ({panels}) => {
           DataPanelComponents.map(Panel => <Panel/>)
         }
       </div>
+      <SideModal></SideModal>
     </div>)
 };
 

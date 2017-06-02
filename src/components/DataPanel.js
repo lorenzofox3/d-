@@ -2,7 +2,7 @@ import Panel from './Panel';
 import {ROWS, COLUMNS} from '../lib/const';
 import {h} from 'flaco';
 
-export default ({dx, dy, x, y, adornerStatus = 0, onDragStart}) => {
+export default ({dx, dy, x, y, adornerStatus = 0, onClick, onDragStart}) => {
 
   const panelClasses = ['empty-panel'];
 
@@ -13,7 +13,7 @@ export default ({dx, dy, x, y, adornerStatus = 0, onDragStart}) => {
   }
 
   return (<Panel style={`z-index:${zIndex};`} x={x} y={y} dx={dx} dy={dy} panelClasses={panelClasses}>
-    <button>+</button>
+    <button onClick={onClick}>+</button>
     <div class="resize-handle" draggable="true" onDragStart={onDragStart}></div>
   </Panel>);
 }

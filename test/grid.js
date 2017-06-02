@@ -1,5 +1,5 @@
 import zora from 'zora';
-import {indexFromDef, defFromIndex, valuesFromDef, AreaFactory} from '../src/lib/grid';
+import {indexFromDef, defFromIndex, valuesFromDef, AreaFactory, Grid} from '../src/lib/grid';
 
 export default zora()
   .test('indexFromIndex', function * (t) {
@@ -116,5 +116,25 @@ export default zora()
       0, 0, 0, 0
     ])));
   })
+  .test('Grid: should be an iterable with the panels definition', function * (t) {
+    const g = Grid({rows: 2, columns: 2});
+    const panelsDef = [...g];
+    t.deepEqual(panelsDef, [
+      {x: 1, y: 1, dx: 1, dy: 1, adornerStatus: 0},
+      {x: 2, y: 1, dx: 1, dy: 1, adornerStatus: 0},
+      {x: 1, y: 2, dx: 1, dy: 1, adornerStatus: 0},
+      {x: 2, y: 2, dx: 1, dy: 1, adornerStatus: 0}
+    ]);
+  })
+  .test('Grid: panel at should return an area equivalent to the definition', function * (t) {
+    const g = Grid({rows: 2, columns: 2});
+    g.updateAt(1, 1, {dx: 2});
+    const a = g.panel(1, 1);
+    t.deepEqual(a.values, [
+      1, 1,
+      0, 0
+    ]);
+  });
+
 
 

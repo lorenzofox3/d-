@@ -13,10 +13,10 @@ export default zora()
     const newState = red({active: {x: 2, y: 1}}, {type: 'RESIZE_OVER', x: 2, y: 2});
     t.deepEqual(newState, {
       active: {x: 2, y: 1}, panels: [
-        {x: 1, y: 1, dx: 1, dy: 1, adornerStatus: 0},
-        {x: 2, y: 1, dx: 1, dy: 1, adornerStatus: 1},
-        {x: 1, y: 2, dx: 1, dy: 1, adornerStatus: 0},
-        {x: 2, y: 2, dx: 1, dy: 1, adornerStatus: 1}
+        {x: 1, y: 1, dx: 1, dy: 1, adornerStatus: 0, data: {}},
+        {x: 2, y: 1, dx: 1, dy: 1, adornerStatus: 1, data: {}},
+        {x: 1, y: 2, dx: 1, dy: 1, adornerStatus: 0, data: {}},
+        {x: 2, y: 2, dx: 1, dy: 1, adornerStatus: 1, data: {}}
       ]
     });
   })
@@ -28,10 +28,10 @@ export default zora()
     const newState = red({active: {x: 2, y: 1}}, {type: 'RESIZE_OVER', x: 2, y: 2});
     t.deepEqual(newState, {
       active: {x: 2, y: 1}, panels: [
-        {x: 1, y: 1, dx: 1, dy: 1, adornerStatus: 0},
-        {x: 2, y: 1, dx: 1, dy: 1, adornerStatus: 1},
-        {x: 1, y: 2, dx: 2, dy: 1, adornerStatus: -1},
-        {x: 2, y: 2, dx: 1, dy: 1, adornerStatus: -1}
+        {x: 1, y: 1, dx: 1, dy: 1, data: {}, adornerStatus: 0},
+        {x: 2, y: 1, dx: 1, dy: 1, data: {}, adornerStatus: 1},
+        {x: 1, y: 2, dx: 2, dy: 1, data: {}, adornerStatus: -1},
+        {x: 2, y: 2, dx: 1, dy: 1, data: {}, adornerStatus: -1}
       ]
     });
   })
@@ -43,10 +43,10 @@ export default zora()
     const newState = red({active: {x: 1, y: 1}}, {type: 'RESIZE_OVER', x: 2, y: 2});
     t.deepEqual(newState, {
       active: {x: 1, y: 1}, panels: [
-        {x: 1, y: 1, dx: 1, dy: 1, adornerStatus: 1},
-        {x: 2, y: 1, dx: 1, dy: 1, adornerStatus: 1},
-        {x: 1, y: 2, dx: 2, dy: 1, adornerStatus: 1},
-        {x: 2, y: 2, dx: 1, dy: 1, adornerStatus: 1}
+        {x: 1, y: 1, dx: 1, dy: 1, adornerStatus: 1, data: {}},
+        {x: 2, y: 1, dx: 1, dy: 1, adornerStatus: 1, data: {}},
+        {x: 1, y: 2, dx: 2, dy: 1, adornerStatus: 1, data: {}},
+        {x: 2, y: 2, dx: 1, dy: 1, adornerStatus: 1, data: {}}
       ]
     });
   })
@@ -55,10 +55,10 @@ export default zora()
     const newState = red({active: {x: 2, y: 1}}, {type: 'END_RESIZE', startX: 2, startY: 1, x: 2, y: 2});
     t.deepEqual(newState, {
       active: null, panels: [
-        {x: 1, y: 1, dx: 1, dy: 1, adornerStatus: 0},
-        {x: 2, y: 1, dx: 1, dy: 2, adornerStatus: 0},
-        {x: 1, y: 2, dx: 1, dy: 1, adornerStatus: 0},
-        {x: 2, y: 2, dx: 1, dy: 1, adornerStatus: 0}
+        {x: 1, y: 1, dx: 1, dy: 1, adornerStatus: 0, data: {}},
+        {x: 2, y: 1, dx: 1, dy: 2, adornerStatus: 0, data: {}},
+        {x: 1, y: 2, dx: 1, dy: 1, adornerStatus: 0, data: {}},
+        {x: 2, y: 2, dx: 1, dy: 1, adornerStatus: 0, data: {}}
       ]
     });
   })
@@ -70,10 +70,10 @@ export default zora()
     const newState = red({active: {x: 2, y: 1}}, {type: 'END_RESIZE', startX: 2, startY: 1, x: 2, y: 2});
     t.deepEqual(newState, {
       active: null, panels: [
-        {x: 1, y: 1, dx: 1, dy: 1, adornerStatus: 0},
-        {x: 2, y: 1, dx: 1, dy: 1, adornerStatus: 0},
-        {x: 1, y: 2, dx: 2, dy: 1, adornerStatus: 0},
-        {x: 2, y: 2, dx: 1, dy: 1, adornerStatus: 0}
+        {x: 1, y: 1, dx: 1, dy: 1, adornerStatus: 0, data: {}},
+        {x: 2, y: 1, dx: 1, dy: 1, adornerStatus: 0, data: {}},
+        {x: 1, y: 2, dx: 2, dy: 1, adornerStatus: 0, data: {}},
+        {x: 2, y: 2, dx: 1, dy: 1, adornerStatus: 0, data: {}}
       ]
     });
   })
@@ -85,10 +85,10 @@ export default zora()
     const newState = red({active: {x: 1, y: 1}}, {type: 'END_RESIZE', startX: 1, startY: 1, x: 2, y: 2});
     t.deepEqual(newState, {
       active: null, panels: [
-        {x: 1, y: 1, dx: 2, dy: 2, adornerStatus: 0},
-        {x: 2, y: 1, dx: 1, dy: 1, adornerStatus: 0},
-        {x: 1, y: 2, dx: 1, dy: 1, adornerStatus: 0},
-        {x: 2, y: 2, dx: 1, dy: 1, adornerStatus: 0}
+        {x: 1, y: 1, dx: 2, dy: 2, adornerStatus: 0, data: {}},
+        {x: 2, y: 1, dx: 1, dy: 1, adornerStatus: 0, data: {}},
+        {x: 1, y: 2, dx: 1, dy: 1, adornerStatus: 0, data: {}},
+        {x: 2, y: 2, dx: 1, dy: 1, adornerStatus: 0, data: {}}
       ]
     });
   })

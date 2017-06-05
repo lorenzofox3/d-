@@ -3,5 +3,5 @@ import modalReducer from './modal';
 
 export default (grid) => (state = {}, action) => ({
   grid: gridReducer(grid)(state.grid, action),
-  modal: modalReducer(state.modal, action)
+  modal: modalReducer(grid)(state.modal, action)
 });

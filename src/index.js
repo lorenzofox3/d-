@@ -1,55 +1,16 @@
-import {mount, h, connect} from 'flaco';
-import {createStore} from 'redux';
-import reducer from './reducers/index';
-import  * as actionCreators from './actions/index';
-import {Grid} from './lib/grid'
-import subscribe from './containers/panel';
+import {mount, h} from 'flaco';
 import AdornerPanel from './components/AdornerPanel';
-import DataPanel from './components/DataPanel';
+import {EmptyDataPanel} from './components/ResizableDataPanel';
 import {ROWS, COLUMNS} from './lib/const';
-import Modal from './components/Modal';
-import connectModal from './containers/modal';
+import App from './lib/store';
+import EditPanelData from './components/EditPanelDataModal';
+import modalify from './combinators/modal'
+import {compose} from 'smart-table-operators'
 
-//todo: find  this from server etc
-const grid = Grid({rows: ROWS, columns: COLUMNS});
-const initialState = {
-  grid: {
-    panels: [...grid],
-    active: null
-  }
-};
-//
+const {store, connect, gridify} = App;
 
-const store = createStore(reducer(grid), initialState);
-const actions = {
-  resizeOver: (arg) => store.dispatch(actionCreators.resizeOver(arg)),
-  endResize: (arg) => store.dispatch(actionCreators.endResize(arg)),
-  startResize: (arg) => store.dispatch(actionCreators.startResize(arg)),
-  openModal: (args) => store.dispatch(actionCreators.openModal(args)),
-  closeModal: (args) => store.dispatch(actionCreators.closeModal(args))
-};
-
-const onDragResize = (x, y) => ev => {
-  ev.dataTransfer.dropEffect = 'move';
-  ev.dataTransfer.setData('text/plain', JSON.stringify({x, y}));
-  actions.startResize({x, y});
-};
-
-const onClickOpenModal = (x, y) => ev => {
-  actions.openModal({x, y, title:'Create new data panel', modalType:'newDataPanel'});
-};
-
-const ResizableDataPanel = (props) => {
-  const {x, y} = props;
-  const onDragStart = onDragResize(x, y);
-  const onClick = onClickOpenModal(x, y);
-  return <DataPanel onDragStart={onDragStart} onClick={onClick} {...props} ></DataPanel>
-};
-
-const SideModal = connectModal(store, actions)(props => {
-  return (<Modal closeModal={actions.closeModal} {...props} ></Modal>);
-});
-
+const connectToModal = connect(state => state.modal);
+const SideModal = compose(modalify,gridify,connectToModal)(EditPanelData);//connectToModal(gridify(modalify(EditPanelData)));
 
 const getCoordsFromMouseEvent = (columns, rows) => (ev) => {
   const {currentTarget, offsetX, offsetY} = ev;
@@ -67,13 +28,16 @@ const getCoordsFromMouseEvent = (columns, rows) => (ev) => {
   return {x, y};
 };
 
-const Container = ({panels}) => {
-  const subscribeTo = subscribe(store, actions);
-  const subscribeFunctions = panels.map(({x, y}) => subscribeTo(x, y));
+const Container = gridify(({panels}, grid, actions) => {
 
-  const AdornerPanelComponents = subscribeFunctions.map(subscribe => subscribe(props => <AdornerPanel {...props} />));
-  const DataPanelComponents = subscribeFunctions.map(subscribe => subscribe(props =>
-    <ResizableDataPanel {...props} />));
+  //create subscription to panel(x,y)
+  const findPanelFromState = (x, y) => state => state.grid.panels.find(({x:px, y:py}) => x === px && y === py);
+  const subscribeTo = (x, y) => connect(findPanelFromState(x, y));
+  const subscribeFunctions = panels.map(({x, y}) => compose(gridify, subscribeTo(x, y)));
+
+  //create connected components
+  const AdornerPanelComponents = subscribeFunctions.map(subscribe => subscribe(AdornerPanel));
+  const DataPanelComponents = subscribeFunctions.map(subscribe => subscribe(EmptyDataPanel));
 
   const coords = getCoordsFromMouseEvent(COLUMNS, ROWS);
 
@@ -95,21 +59,20 @@ const Container = ({panels}) => {
     ev.preventDefault();
   };
 
-  return (
-    <div class="grid-container">
-      <div class="grid adorner-layer">
-        {
-          AdornerPanelComponents.map(Panel => <Panel/>)
-        }
-      </div>
-      <div class="grid data-layer" onDragover={onDragOver} onDrop={onDrop}>
-        {
-          DataPanelComponents.map(Panel => <Panel/>)
-        }
-      </div>
-      <SideModal></SideModal>
-    </div>)
-};
+  return (<div class="grid-container">
+    <div class="grid adorner-layer">
+      {
+        AdornerPanelComponents.map(Panel => <Panel/>)
+      }
+    </div>
+    <div class="grid data-layer" onDragover={onDragOver} onDrop={onDrop}>
+      {
+        DataPanelComponents.map(Panel => <Panel/>)
+      }
+    </div>
+    <SideModal />
+  </div>);
+});
 
 const {grid:{panels}} = store.getState();
 

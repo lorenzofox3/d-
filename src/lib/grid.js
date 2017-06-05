@@ -82,7 +82,8 @@ export const Grid = ({panelsData = [], rows = 4, columns = 4} ={}) => {
     panels = (new Array(rows * columns)).fill(0).map((_, index) => Object.assign(iToDef(index), {
       dx: 1,
       dy: 1,
-      adornerStatus: 0
+      adornerStatus: 0,
+      data: {}
     }));
   }
 
@@ -104,6 +105,9 @@ export const Grid = ({panelsData = [], rows = 4, columns = 4} ={}) => {
     },
     area(x, y, dx = 1, dy = 1){
       return area(toValues({x, y, dx, dy}));
+    },
+    getData(x, y){
+      return panels.find(p => p.x === x && p.y === y) || {};
     }
   };
 };

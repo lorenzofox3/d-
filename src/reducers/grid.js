@@ -83,6 +83,11 @@ export default (grid = Grid()) => (state = {active: null, panels: [...grid]}, ac
         active: null
       });
     }
+    case 'UPDATE_PANEL_DATA': {
+      const {x, y, data} = action;
+      grid.updateAt(x, y, {data});
+      return Object.assign({}, state, {panels: [...grid]});
+    }
     default:
       return state;
   }

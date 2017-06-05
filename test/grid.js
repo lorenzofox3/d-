@@ -120,10 +120,10 @@ export default zora()
     const g = Grid({rows: 2, columns: 2});
     const panelsDef = [...g];
     t.deepEqual(panelsDef, [
-      {x: 1, y: 1, dx: 1, dy: 1, adornerStatus: 0},
-      {x: 2, y: 1, dx: 1, dy: 1, adornerStatus: 0},
-      {x: 1, y: 2, dx: 1, dy: 1, adornerStatus: 0},
-      {x: 2, y: 2, dx: 1, dy: 1, adornerStatus: 0}
+      {x: 1, y: 1, dx: 1, dy: 1, adornerStatus: 0, data:{}},
+      {x: 2, y: 1, dx: 1, dy: 1, adornerStatus: 0, data:{}},
+      {x: 1, y: 2, dx: 1, dy: 1, adornerStatus: 0, data:{}},
+      {x: 2, y: 2, dx: 1, dy: 1, adornerStatus: 0, data:{}}
     ]);
   })
   .test('Grid: panel at should return an area equivalent to the definition', function * (t) {

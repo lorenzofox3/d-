@@ -5,7 +5,7 @@ export default (grid) => (state = {isOpen: false}, action) => {
       return Object.assign({}, state, {isOpen: true, title, modalType, x, y});
     }
     case 'CLOSE_MODAL': {
-      return Object.assign({}, state, {isOpen: false});
+      return Object.assign({}, state, {isOpen: false, title:'', modalType:'none'});
     }
     default:
       return state;

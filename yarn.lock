@@ -30,17 +30,11 @@ array-find-index@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/array-find-index/-/array-find-index-1.0.2.tgz#df010aa1287e164bbda6f9723b0a96a1ec4187a1"
 
-axios@^0.15.2:
-  version "0.15.3"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.15.3.tgz#2c9d638b2e191a08ea1d6cc988eadd6ba5bdc053"
-  dependencies:
-    follow-redirects "1.0.0"
-
 balanced-match@^0.4.1:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-0.4.2.tgz#cb3f3e3c732dc0f01ee70b403f302e61d7709838"
 
-brace-expansion@^1.0.0:
+brace-expansion@^1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.7.tgz#3effc3c50e000531fb720eaff80f0ae8ef23cf59"
   dependencies:
@@ -104,12 +98,6 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
-debug@^2.2.0:
-  version "2.6.8"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
-  dependencies:
-    ms "2.0.0"
-
 decamelize@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
@@ -145,24 +133,9 @@ flaco@^0.3.0:
   dependencies:
     smart-table-operators "^2.0.1"
 
-follow-redirects@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.0.0.tgz#8e34298cbd2e176f254effec75a1c78cc849fd37"
-  dependencies:
-    debug "^2.2.0"
-
 get-stdin@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-4.0.1.tgz#b968c6b0a04384324902e8bf1a5df32579a450fe"
-
-github-api@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/github-api/-/github-api-3.0.0.tgz#2832f98d0d3a83f1485e2db32c9259e4b9c40a75"
-  dependencies:
-    axios "^0.15.2"
-    debug "^2.2.0"
-    js-base64 "^2.1.9"
-    utf8 "^2.1.1"
 
 graceful-fs@^4.1.2:
   version "4.1.11"
@@ -207,10 +180,6 @@ is-module@^1.0.0:
 is-utf8@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/is-utf8/-/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
-
-js-base64@^2.1.9:
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
 
 js-tokens@^3.0.0:
   version "3.0.1"
@@ -279,18 +248,14 @@ meow@^3.7.0:
     trim-newlines "^1.0.0"
 
 minimatch@^3.0.2:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.3.tgz#2a4e4090b96b2db06a9d7df01055a62a77c9b774"
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   dependencies:
-    brace-expansion "^1.0.0"
+    brace-expansion "^1.1.7"
 
 minimist@^1.1.3, minimist@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
-
-ms@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
 normalize-package-data@^2.3.2, normalize-package-data@^2.3.4:
   version "2.3.8"
@@ -439,9 +404,9 @@ rollup-watch@^3.2.2:
   dependencies:
     require-relative "0.8.7"
 
-rollup@^0.41.6:
-  version "0.41.6"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.41.6.tgz#e0d05497877a398c104d816d2733a718a7a94e2a"
+rollup@^0.42.0:
+  version "0.42.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.42.0.tgz#56e791b3a2f3dd7190bbb80a375675f2fe0f9b23"
   dependencies:
     source-map-support "^0.4.0"
 
@@ -453,13 +418,48 @@ signal-exit@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
-smart-table-events@^1.0.2:
+smart-table-core@^1.3.5:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/smart-table-core/-/smart-table-core-1.3.5.tgz#35e5f7f79461787e83abecae22ea4c8a65f8c763"
+  dependencies:
+    smart-table-events "^1.0.0"
+    smart-table-filter "^1.0.0"
+    smart-table-json-pointer "^1.0.1"
+    smart-table-operators "^2.0.0"
+    smart-table-search "^1.0.1"
+    smart-table-sort "^1.0.0"
+
+smart-table-events@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/smart-table-events/-/smart-table-events-1.0.2.tgz#ff6ec3b5f47effbfc6d42bfb85120150c8863d53"
 
-smart-table-operators@^2.0.1:
+smart-table-filter@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/smart-table-filter/-/smart-table-filter-1.0.0.tgz#85e3fcc356dd02fd4bd2e6321d538893e190ce6e"
+  dependencies:
+    smart-table-json-pointer "^1.0.1"
+    smart-table-operators "^2.0.0"
+
+smart-table-json-pointer@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/smart-table-json-pointer/-/smart-table-json-pointer-1.0.1.tgz#8927850521a49f4b74c778c2e1686a23ec21f742"
+
+smart-table-operators@^2.0.0, smart-table-operators@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/smart-table-operators/-/smart-table-operators-2.0.1.tgz#73a30c464b10f449a8de4ef4e6806394ac7f7d86"
+
+smart-table-search@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/smart-table-search/-/smart-table-search-1.0.1.tgz#63775aea2c853deaeb5f0d9a7b4af1ad5bb4f0a8"
+  dependencies:
+    smart-table-json-pointer "^1.0.1"
+
+smart-table-sort@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/smart-table-sort/-/smart-table-sort-1.0.0.tgz#e5ed29210e536b8e757e17ffb29ca0536df53d27"
+  dependencies:
+    smart-table-json-pointer "^1.0.1"
+    smart-table-operators "^2.0.0"
 
 source-map-support@^0.4.0:
   version "0.4.15"
@@ -514,10 +514,6 @@ symbol-observable@^1.0.2:
 trim-newlines@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/trim-newlines/-/trim-newlines-1.0.0.tgz#5887966bb582a4503a41eb524f7d35011815a613"
-
-utf8@^2.1.1:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/utf8/-/utf8-2.1.2.tgz#1fa0d9270e9be850d9b05027f63519bf46457d96"
 
 validate-npm-package-license@^3.0.1:
   version "3.0.1"

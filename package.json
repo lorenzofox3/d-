@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "rollup": "^0.41.6",
+    "rollup": "^0.42.0",
     "rollup-plugin-buble": "^0.15.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.1.1",
@@ -24,6 +24,7 @@
   "dependencies": {
     "flaco": "^0.3.0",
     "redux": "^3.6.0",
+    "smart-table-core": "^1.3.5",
     "smart-table-operators": "^2.0.1"
   }
 }

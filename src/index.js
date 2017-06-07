@@ -1,16 +1,15 @@
 import {mount, h} from 'flaco';
 import AdornerPanel from './components/AdornerPanel';
-import {EmptyDataPanel} from './components/ResizableDataPanel';
+import {DataPanel} from './components/ResizableDataPanel';
 import {ROWS, COLUMNS} from './lib/const';
 import App from './lib/store';
-import EditPanelData from './components/EditPanelDataModal';
-import modalify from './combinators/modal'
+import Modal from './components/Modal.js';
 import {compose} from 'smart-table-operators'
 
 const {store, connect, gridify} = App;
 
 const connectToModal = connect(state => state.modal);
-const SideModal = compose(modalify,gridify,connectToModal)(EditPanelData);//connectToModal(gridify(modalify(EditPanelData)));
+const SideModal = compose(gridify,connectToModal)(Modal);
 
 const getCoordsFromMouseEvent = (columns, rows) => (ev) => {
   const {currentTarget, offsetX, offsetY} = ev;
@@ -37,7 +36,7 @@ const Container = gridify(({panels}, grid, actions) => {
 
   //create connected components
   const AdornerPanelComponents = subscribeFunctions.map(subscribe => subscribe(AdornerPanel));
-  const DataPanelComponents = subscribeFunctions.map(subscribe => subscribe(EmptyDataPanel));
+  const DataPanelComponents = subscribeFunctions.map(subscribe => subscribe(DataPanel));
 
   const coords = getCoordsFromMouseEvent(COLUMNS, ROWS);
 
@@ -79,6 +78,3 @@ const {grid:{panels}} = store.getState();
 mount(Container, {
   panels: panels
 }, document.getElementById('main'));
-
-//todo remove dirty hack: kick with initial state
-setTimeout(() => store.dispatch({type: 'FOO'}), 50);

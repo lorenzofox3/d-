@@ -14,10 +14,11 @@
     --grid-gap-column: 0.4em;
     --dashed-color: #bfbfbf;
     --panel-background-color: white;
-    --highlight-color: #6963e6;
+    --highlight-color: #ff9500;
     --frame-background-color: #4e4e4e;
     --frame-color: #ededed;
     --grid-background-color: #e8e8e8;
+    --link-color: #698ae6;
 
     /*
     functional
@@ -55,6 +56,10 @@ main {
     flex-direction: column;
 }
 
+a {
+    color: var(--link-color);
+}
+
 .grid-container {
     position: relative;
     display: inline-block;
@@ -71,8 +76,6 @@ main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-auto-columns: 1fr;
-    grid-auto-rows: 1fr;
 }
 
 .adorner-layer {
@@ -90,10 +93,8 @@ main {
     grid-row: var(--grid-row-offset) / calc(var(--grid-row-span) + var(--grid-row-offset));
 }
 
-.empty-panel {
-
+.data-panel {
     --border-width: 1px;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,9 +102,10 @@ main {
     position: relative;
     background: var(--panel-background-color);
     box-shadow: 2px 2px 3px 0 #dadada;
+    overflow: hidden;
 }
 
-.empty-panel > button {
+.data-panel > button {
     transition: all 0.3s;
     padding: 0.5em 1em;
     background: inherit;
@@ -112,9 +114,9 @@ main {
     border-radius: 5px;
 }
 
-.empty-panel:hover {
+.data-panel:hover {
     border-style: dashed;
-    --border-width: 2px;
+    /*--border-width: 2px;*/
     --dashed-color: var(--highlight-color);
 }
 
@@ -129,7 +131,7 @@ main {
     background-image: linear-gradient(-45deg, var(--dashed-color) 1.4em, transparent 1.4em);
 }
 
-.empty-panel:hover > button {
+.data-panel:hover > button {
     padding: 2em 4em;
 }
 
@@ -145,9 +147,32 @@ main {
     background: orangered;
 }
 
-/*[aria-hidden=true] {*/
-/*display: none;*/
-/*}*/
+.panel-content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-content h2 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 1.2rem;
+    padding: 0.1em 0.5em;
+    text-align: center;
+}
+
+.panel-body {
+    flex-grow: 1;
+    padding: 0.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-body h2, .panel-body h3 {
+    font-size: 1em;
+}
 
 header[role=banner], aside {
     background: var(--frame-background-color);
@@ -176,7 +201,7 @@ aside {
     border-left: 1px solid black;
 }
 
-.modal header{
+.modal header {
     display: flex;
 }
 
@@ -184,7 +209,7 @@ aside {
     flex-grow: 1;
 }
 
-.modal-content{
+.modal-content {
     padding: 0.5em;
 }
 
@@ -196,24 +221,86 @@ aside {
 FORM
  */
 
-form, label{
+form, label {
     display: flex;
     flex-direction: column;
     margin: 0.5em 0;
 }
 
-input{
-    padding: 0.2em;
+input, select {
+    padding: 0 0.5em;
     outline: none;
-    border:1px solid black;
-    font:inherit;
+    border: 1px solid black;
+    font-style: italic;
+    color: inherit;
+    font-size: 0.9em;
+    height: 2em;
+    border-radius: 0;
     background: var(--frame-background-color);
+    font-weight: lighter;
 }
 
-input:focus{
-    background: #ff7800;
-    color:var(--frame-color);
+input:focus, select:focus {
+    background: var(--highlight-color);
+    color: var(--frame-color);
 }
+
+form button {
+    border-style: solid;
+    border-width: 1px;
+    border-color: transparent #373737 #373737 transparent;
+    background: var(--highlight-color);
+    color: inherit;
+    padding: 0.5em;
+    font: inherit;
+    border-radius: 2px;
+    box-shadow: 1px 1px 2px 0 #2b2b2b;
+}
+
+/**
+ISSUES
+ */
+
+.issues-container, .issues-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.issues-list {
+    list-style: none;
+    padding: 0.5em;
+    font-size: 0.9em;
+    overflow: scroll;
+}
+
+.issues-list > li:not(:first-child) {
+    border-top: 1px solid var(--dashed-color);
+}
+
+.issue {
+    padding: 0.5em 0;
+}
+
+.issue header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.issue header > * {
+    padding: 0.5em;
+}
+
+.issue header p {
+    margin: 0;
+}
+
+/*todo*/
+.issue header > div {
+    flex-grow: 1;
+}
+
+
 
 
 

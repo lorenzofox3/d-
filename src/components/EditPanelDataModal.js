@@ -1,15 +1,11 @@
 import {h} from 'flaco';
 import {EditDataPanelModal} from '../views/EditDataPanelForm';
 
-export default (props, grid, actions) => {
-  const {x, y, data = {}, modalType} = props;
+export default (props, {actions}) => {
+  const {x, y, data = {}} = props;
   const onSubmit = ev => {
     ev.preventDefault();
     actions.updatePanelData({x, y, data: data});
-    const {type} = data;
-    if (type === 'list') {
-
-    }
     actions.closeModal();
   };
 

@@ -60,6 +60,26 @@ a {
     color: var(--link-color);
 }
 
+.processing-overlay {
+    position: absolute;
+    z-index: 200;
+    background: rgba(74, 74, 74, 0.63);
+    color: white;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.processing-overlay[aria-hidden=true] {
+    display: none;
+}
+
+/**
+GRID
+ */
 .grid-container {
     position: relative;
     display: inline-block;
@@ -88,6 +108,13 @@ a {
     grid-gap: var(--grid-gap-row) var(--grid-gap-column);
 }
 
+/**
+END GRID
+ */
+
+/**
+PANEL
+ */
 .panel {
     grid-column: var(--grid-column-offset) / calc(var(--grid-column-span) + var(--grid-column-offset));
     grid-row: var(--grid-row-offset) / calc(var(--grid-row-span) + var(--grid-row-offset));
@@ -105,6 +132,13 @@ a {
     overflow: hidden;
 }
 
+button{
+    font:inherit;
+    border: 1px solid currentColor;
+    background: inherit;
+    border-radius: 5px;
+}
+
 .data-panel > button {
     transition: all 0.3s;
     padding: 0.5em 1em;
@@ -120,11 +154,21 @@ a {
     --dashed-color: var(--highlight-color);
 }
 
-.resize-handle {
+.move-handle, .resize-handle {
     position: absolute;
     display: inline-block;
     width: 2em;
     height: 2em;
+}
+
+.move-handle {
+    cursor: move;
+    background-image: linear-gradient(135deg, var(--dashed-color) 1.4em, transparent 1.4em);
+    left: calc(-1 * var(--border-width, 1px));
+    top: calc(-1 * var(--border-width, 1px));
+}
+
+.resize-handle {
     right: calc(-1 * var(--border-width, 1px));
     bottom: calc(-1 * var(--border-width, 1px));
     cursor: se-resize;
@@ -137,6 +181,16 @@ a {
 
 .active-panel {
     opacity: 0.2;
+}
+
+/*.data-panel.active-panel:not(.empty-panel){*/
+/*background: linear-gradient(90deg,transparent 2em,gray 2em);*/
+/*background-repeat: repeat;*/
+/*background-size: 4em 4em;*/
+/*}*/
+
+.active-panel .panel-body {
+    display: none;
 }
 
 .valid-panel {
@@ -154,10 +208,14 @@ a {
     flex-direction: column;
 }
 
-.panel-content h2 {
+.panel-header{
+    display: grid;
+    grid-template-columns: 1fr max-content max-content;
+}
+
+.panel-header h2{
     white-space: nowrap;
     text-overflow: ellipsis;
-    overflow: hidden;
     font-size: 1.2rem;
     padding: 0.1em 0.5em;
     text-align: center;
@@ -165,9 +223,10 @@ a {
 
 .panel-body {
     flex-grow: 1;
-    padding: 0.5em;
+    padding: 0.2em;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .panel-body h2, .panel-body h3 {
@@ -261,7 +320,7 @@ form button {
 ISSUES
  */
 
-.issues-container, .issues-list {
+.issues-container, .issues-list, .issues-list-container {
     display: flex;
     flex-direction: column;
 }
@@ -271,6 +330,7 @@ ISSUES
     padding: 0.5em;
     font-size: 0.9em;
     overflow: scroll;
+    margin: 0;
 }
 
 .issues-list > li:not(:first-child) {
@@ -279,30 +339,46 @@ ISSUES
 
 .issue {
     padding: 0.5em 0;
-}
-
-.issue header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template: 1fr 1fr/ max-content 1fr max-content;
+    grid-gap: 0.2em 0.5em;
     align-items: center;
 }
 
-.issue header > * {
-    padding: 0.5em;
-}
-
-.issue header p {
+.issue p {
     margin: 0;
 }
 
-/*todo*/
-.issue header > div {
-    flex-grow: 1;
+.issue h3 {
+    grid-area: 1 / 2;
 }
 
+.issue .meta {
+    grid-area: 2 / 2;
+    color: #666666;
+}
 
+.issue .status {
+    grid-area: 2 / 1;
+}
 
+.issue p:last-child {
+    grid-row: 1 / span 2;
+}
 
+.fake-border {
+    display: inline-block;
+    padding: 3px;
+}
+
+.issues-list-container:hover .fake-border {
+    box-shadow: 0 6px 10px 0 rgba(56, 56, 56, 0.2), 0 13px 12px 0 #ececec;
+
+}
+
+.issues-list-container:hover .fake-border:last-child {
+    box-shadow: 0 -6px 10px 0 rgba(56, 56, 56, 0.2), 0 -13px 12px 0 #ececec;
+}
 
 
 

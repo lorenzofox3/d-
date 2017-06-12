@@ -2,27 +2,32 @@ import {h} from 'flaco';
 
 export const IssueCard = (props) => {
   const {issue = {}} = props;
-  const {id, state, created_at, number, html_url, title} = issue;
+  const {state, created_at, user, number, html_url, title, comments} = issue;
   return <article class="issue">
-    <header>
-      <a href={html_url}>#{number}</a>
-      <div>
-        <h3>{title}</h3>
-        <small>created at:
-          <time>{created_at}</time>
-        </small>
-      </div>
-      <span>{state}</span>
-    </header>
+    <h3>{title}</h3>
+    <a rel="self" href={html_url}>#{number}</a>
+    <span class="status">{state}</span>
+    <p class="meta">opened on
+      <time> {(new Date(created_at)).toDateString()} </time>
+      by <a rel="author" href={user.html_url}>{user.login}</a>
+    </p>
+    <p>
+      {comments} C
+    </p>
   </article>
 };
 
 
 export const IssuesList = (props) => {
   const {issues = []} = props;
-  return (<ul class="issues-list">
-    {
-      issues.map(i => <li><IssueCard issue={i}/></li>)
-    }
-  </ul>);
+  return (
+    <div class="issues-list-container">
+      <div class="fake-border"></div>
+      <ul class="issues-list">
+        {
+          issues.map(i => <li><IssueCard issue={i}/></li>)
+        }
+      </ul>
+      <div class="fake-border"></div>
+    </div>);
 };

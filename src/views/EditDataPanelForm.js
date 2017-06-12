@@ -1,7 +1,7 @@
 import {h, onMount, withState} from 'flaco';
 import Modal from './Modal';
 
-const autofocus = onMount((vnode)=>{
+const autofocus = onMount((vnode) => {
   vnode.dom.focus();
 });
 const AutofocusInput = autofocus(props => <input {...props} />);
@@ -17,7 +17,6 @@ const SourceTypeSelect = props => {
     </select>
   </label>
 };
-
 const ListInput = (props) => {
   return (<div>
     <SourceTypeSelect {...props} />
@@ -82,8 +81,8 @@ export const EditDataPanelModal = (props) => {
   const UpdatableFormSection = withState((props, update) => {
     const {data = {}} = props;
     const onUpdate = (val) => {
-      Object.assign(data,val);
-      update(Object.assign(props,{data}));
+      Object.assign(data, val);
+      update(Object.assign(props, {data}));
     };
     return <EditDataPanelForm onUpdate={onUpdate} {...props}/>;
   });

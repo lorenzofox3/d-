@@ -15,6 +15,10 @@ export default (state = [], action) => {
         }
       });
     }
+    case 'REMOVE_SMART_LIST': {
+      const {x, y} = action;
+      return state.filter(f => f.x !== x || f.y !== y);
+    }
     default:
       return state;
   }

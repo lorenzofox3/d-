@@ -1,16 +1,28 @@
 import {h} from 'flaco';
-import EditPanelDataModal from '../components/EditPanelDataModal';
+import EditPanelDataModal from './EditPanelDataModal';
+import ConfirmationModal from './ConfirmationModal';
 import {default as ModalView}  from '../views/Modal';
 
-export const EmptyModal = (props, grid, actions) => {
+export const EmptyModal = (props, {actions}) => {
   return (<ModalView isOpen={props.isOpen} closeModal={actions.closeModal}>
     <div></div>
   </ModalView>);
 };
 
 
-export default Modal = (props, grid, actions) => {
+const getModalComponent = (modalType) => {
+  switch (modalType) {
+    case 'createPanelData':
+      return EditPanelDataModal;
+    case 'askConfirmation':
+      return ConfirmationModal;
+    default:
+      return EmptyModal;
+  }
+};
+
+export default Modal = (props, services) => {
   const {modalType} = props;
-  const ModalComponent = modalType === 'createPanelData' ? EditPanelDataModal : EmptyModal;
-  return ModalComponent(props, grid, actions);
+  const ModalComponent = getModalComponent(modalType);
+  return ModalComponent(props, services);
 };

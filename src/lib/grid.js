@@ -107,7 +107,7 @@ export const Grid = ({panelsData = [], rows = 4, columns = 4} ={}) => {
       return area(toValues({x, y, dx, dy}));
     },
     getData(x, y){
-      return panels.find(p => p.x === x && p.y === y) || {};
+      return Object.assign({},panels.find(p => p.x === x && p.y === y) || {});
     }
   };
 };

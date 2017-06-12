@@ -1,15 +1,14 @@
 import {mount, h} from 'flaco';
 import AdornerPanel from './components/AdornerPanel';
-import {DataPanel} from './components/ResizableDataPanel';
-import {ROWS, COLUMNS} from './lib/const';
-import App from './lib/store';
+import DataPanel from './components/DataPanel';
 import Modal from './components/Modal.js';
 import {compose} from 'smart-table-operators'
+import services from './services/index'
+import inject from './lib/di.js';
+import {ROWS, COLUMNS} from './lib/constants';
 
-const {store, connect, gridify} = App;
-
-const connectToModal = connect(state => state.modal);
-const SideModal = compose(gridify,connectToModal)(Modal);
+const connectToModal = services.connect(state => state.modal);
+const SideModal = compose(inject, connectToModal)(Modal);
 
 const getCoordsFromMouseEvent = (columns, rows) => (ev) => {
   const {currentTarget, offsetX, offsetY} = ev;
@@ -27,12 +26,12 @@ const getCoordsFromMouseEvent = (columns, rows) => (ev) => {
   return {x, y};
 };
 
-const Container = gridify(({panels}, grid, actions) => {
+const Container = inject(({panels}, {actions, connect}) => {
 
   //create subscription to panel(x,y)
   const findPanelFromState = (x, y) => state => state.grid.panels.find(({x:px, y:py}) => x === px && y === py);
   const subscribeTo = (x, y) => connect(findPanelFromState(x, y));
-  const subscribeFunctions = panels.map(({x, y}) => compose(gridify, subscribeTo(x, y)));
+  const subscribeFunctions = panels.map(({x, y}) => compose(inject, subscribeTo(x, y)));
 
   //create connected components
   const AdornerPanelComponents = subscribeFunctions.map(subscribe => subscribe(AdornerPanel));
@@ -43,17 +42,23 @@ const Container = gridify(({panels}, grid, actions) => {
   const onDragOver = (ev) => {
     ev.preventDefault();
     const {x, y} = coords(ev);
-    actions.resizeOver(({x, y}));
+    actions.dragOver(({x, y}));
   };
 
   const onDrop = ev => {
     const {dataTransfer} = ev;
     const data = dataTransfer.getData('text/plain');
     const JsonData = JSON.parse(data);
-    const {x:startX, y:startY} = JsonData;
-    if (startX && startY) {
+    const {x:startX, y:startY, operation} = JsonData;
+    if (startX && startY && ['move', 'resize'].includes(operation)) {
       const {x, y} = coords(ev);
-      actions.endResize(({x, startX, y, startY}));
+      const args = {x, startX, y, startY};
+      if (operation === 'resize') {
+        actions.endResize(args);
+      }
+      else {
+        actions.endMove(args);
+      }
     }
     ev.preventDefault();
   };
@@ -73,7 +78,7 @@ const Container = gridify(({panels}, grid, actions) => {
   </div>);
 });
 
-const {grid:{panels}} = store.getState();
+const {grid:{panels}} = services.store.getState();
 
 mount(Container, {
   panels: panels

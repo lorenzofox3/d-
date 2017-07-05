@@ -1,68 +1,63 @@
 import {h, onMount, withState} from 'flaco';
-import Modal from './Modal';
+import modal from './Modal';
+import {compose} from 'smart-table-operators';
+import {Tree, StarFull, Notification, Users, Embed2} from '../components/icons';
 
 const autofocus = onMount((vnode) => {
   vnode.dom.focus();
 });
 const AutofocusInput = autofocus(props => <input {...props} />);
+const statefullModal = compose(withState, modal);
 
 const SourceTypeSelect = props => {
   const {onUpdate} = props;
-  return <label>
-    <span>Source type</span>
-    <select required="true" onChange={ev => onUpdate({source: ev.target.value})} name="sourceType">
-      <option value="">-</option>
-      <option value="issues">Issues</option>
-      <option value="prs">Pull request</option>
-    </select>
-  </label>
-};
-const ListInput = (props) => {
-  return (<div>
-    <SourceTypeSelect {...props} />
-  </div>);
-};
-const ChartInput = () => <p>Chart Input</p>;
-const AggregationInput = () => <p>AggregationInput</p>;
-const NoTypeInput = () => <p>Select a panel type </p>;
-
-const getInputSection = (data = {}) => {
-  const {type} = data;
-  switch (type) {
-    case 'list':
-      return ListInput;
-    case 'chart':
-      return ChartInput;
-    case 'aggregation':
-      return AggregationInput;
-    default:
-      return NoTypeInput;
-  }
-};
-
-export const TypeSection = (props) => {
-  const {data, onUpdate} = props;
-  const InputSection = getInputSection(data);
-  const update = (ev) => {
-    onUpdate({type: ev.target.value});
-  };
-  return (
+  const changeValue = ev => onUpdate({source: ev.target.value});
+  return <fieldset>
+    <legend>Select a data source:</legend>
     <div>
       <label>
-        <span>Panel type:</span>
-        <select onChange={update} required="true" name="type">
-          <option value=""> -</option>
-          <option value="list">List</option>
-          <option value="chart">Chart</option>
-          <option value="aggregation">Aggregation</option>
-        </select>
+        <input required class="visuallyhidden" onChange={changeValue} value="issues" name="sourceType" type="radio"/>
+        <div class="value-icon">
+          <Notification/>
+          <span>Issues</span>
+        </div>
       </label>
-      <InputSection data={data} onUpdate={onUpdate}/>
-    </div>);
+      <label>
+        <input required class="visuallyhidden" onChange={changeValue} value="prs" name="sourceType" type="radio"/>
+        <div class="value-icon">
+          <Tree/>
+          <span>Pull requests</span>
+        </div>
+      </label>
+      <label>
+        <input required onChange={changeValue} class="visuallyhidden" value="stargazers" name="sourceType"
+               type="radio"/>
+        <div class="value-icon">
+          <StarFull/>
+          <span>Stargazers</span>
+        </div>
+      </label>
+      <label>
+        <input required onChange={changeValue} class="visuallyhidden" value="contributors" name="sourceType"
+               type="radio"/>
+        <div class="value-icon">
+          <Users/>
+          <span>Contributors</span>
+        </div>
+      </label>
+      <label>
+        <input required onChange={changeValue} class="visuallyhidden" value="commits" name="sourceType" type="radio"/>
+        <div class="value-icon">
+          <Embed2/>
+          <span>Commits</span>
+        </div>
+      </label>
+    </div>
+  </fieldset>
 };
 
-export const EditDataPanelForm = (props) => {
-  const {data, onUpdate, onSubmit}=props;
+export const CreateSmartListForm = (props) => {
+  const {onUpdate, onSubmit} = props;
   return (
     <div class="modal-content">
       <form onSubmit={onSubmit}>
@@ -70,25 +65,47 @@ export const EditDataPanelForm = (props) => {
           <span>Panel title:</span>
           <AutofocusInput onChange={ev => onUpdate({title: ev.target.value})} name="title" required="true"/>
         </label>
-        <TypeSection data={data} onUpdate={onUpdate}/>
+        <SourceTypeSelect {...props}/>
         <button>Create</button>
       </form>
     </div>);
 };
 
-export const EditDataPanelModal = (props) => {
+export const CreateSmartChartForm = props => {
+  const {onSubmit, onUpdate} = props;
+  return (<div class="modal-content">
+    <form onSubmit={onSubmit}>
+      <label>
+        <span>Panel title:</span>
+        <AutofocusInput onChange={ev => onUpdate({title: ev.target.value})} name="title" required="true"/>
+      </label>
+      <button>Create</button>
+    </form>
+  </div>);
+};
 
-  const UpdatableFormSection = withState((props, update) => {
-    const {data = {}} = props;
+export const CreateSmartListDataPanel = props => {
+  const UpdatableFormSection = statefullModal((props, update) => {
+    const {data} = props;
     const onUpdate = (val) => {
       Object.assign(data, val);
-      update(Object.assign(props, {data}));
+      update({data, ...props});
     };
-    return <EditDataPanelForm onUpdate={onUpdate} {...props}/>;
+    return CreateSmartListForm({onUpdate, ...props});
+  });
+  return UpdatableFormSection(props);
+};
+
+export const CreateSmartChartDataPanel = props => {
+  const UpdatableFormSection = statefullModal((props, update) => {
+    const {data} = props;
+    const onUpdate = val => {
+      Object.assign(data, val);
+      update({data, ...props});
+    };
+    return CreateSmartChartForm({onUpdate, ...props})
   });
 
-  return (<Modal isOpen={props.isOpen} closeModal={props.closeModal} title={props.title}>
-    <UpdatableFormSection {...props}/>
-  </Modal>);
+  return UpdatableFormSection(props);
 };
 

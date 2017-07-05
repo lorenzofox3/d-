@@ -16,7 +16,7 @@ const getCoordsFromMouseEvent = (columns, rows) => (ev) => {
   let xpix = offsetX;
   let ypix = offsetY;
   let {target} = ev;
-  while (target !== currentTarget) {
+  while (target !== currentTarget && target !== void 0) {
     xpix += target.offsetLeft;
     ypix += target.offsetTop;
     target = target.offsetParent;

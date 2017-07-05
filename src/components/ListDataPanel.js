@@ -33,9 +33,19 @@ export default flexible(((props, services) => {
     smartList.remove();
   };
 
-  return (<ListDataPanel onEdit={clickEdit} onReset={clickReset} onMoveStart={onMoveStart}
+  const clickToggleToolBar = _ => {
+    const {data = {}} = panelData;
+    actions.updatePanelData({
+      x, y, data: Object.assign({}, data, {
+        showToolBar: !data.showToolBar
+      })
+    });
+  };
+
+  return (<ListDataPanel onToggleToolBar={clickToggleToolBar} onEdit={clickEdit} onReset={clickReset}
+                         onMoveStart={onMoveStart}
                          onResizeStart={onResizeStart} {...panelData} >
-    <SmartListComponent smartList={smartList} x={x} y={y}/>
+    <SmartListComponent {...panelData} smartList={smartList} x={x} y={y}/>
   </ListDataPanel>);
 }));
 

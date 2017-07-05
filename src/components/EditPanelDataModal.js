@@ -1,15 +1,18 @@
 import {h} from 'flaco';
-import {EditDataPanelModal} from '../views/EditDataPanelForm';
+import {CreateSmartListDataPanel, CreateSmartChartDataPanel} from '../views/EditDataPanelForm';
 
-export default (props, {actions}) => {
-  const {x, y, data = {}} = props;
+const CreateDataPanel = (Comp, defaultData) => (props, {actions}) => {
+  const {x, y, data = defaultData} = props;
   const onSubmit = ev => {
     ev.preventDefault();
-    actions.updatePanelData({x, y, data: data});
+    actions.updatePanelData({x, y, data});
     actions.closeModal();
   };
+  return Comp({data, closeModal: actions.closeModal, onSubmit, ...props});
+};
 
-  return <EditDataPanelModal data={data} closeModal={actions.closeModal} {...props} onSubmit={onSubmit}/>
-}
+export const CreateSmartListModal = CreateDataPanel(CreateSmartListDataPanel, {type: 'list', showToolBar: true});
+
+export const CreateSmartChartModal = CreateDataPanel(CreateSmartChartDataPanel, {type:'chart', showToolBar:true});
 
 

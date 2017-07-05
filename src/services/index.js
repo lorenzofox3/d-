@@ -10,5 +10,5 @@ export default {
   grid,
   smartLists,
   store,
-  connect: sliceState => connect(store, actions, sliceState)
+  connect: sliceState => connect(store, sliceState)
 };

@@ -1,0 +1,256 @@
+.icon {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image: url(sprite.svg);
+}
+.icon-connection {
+  width: 40px;
+  height: 32px;
+  background-position: 0 0;
+}
+.icon-profile {
+  width: 32px;
+  height: 32px;
+  background-position: -48px 0;
+}
+.icon-price-tag {
+  width: 32px;
+  height: 32px;
+  background-position: -96px 0;
+}
+.icon-price-tags {
+  width: 40px;
+  height: 32px;
+  background-position: -144px 0;
+}
+.icon-address-book {
+  width: 32px;
+  height: 32px;
+  background-position: -192px 0;
+}
+.icon-bubbles {
+  width: 36px;
+  height: 32px;
+  background-position: -240px 0;
+}
+.icon-user {
+  width: 32px;
+  height: 32px;
+  background-position: -288px 0;
+}
+.icon-user-check {
+  width: 32px;
+  height: 32px;
+  background-position: -336px 0;
+}
+.icon-enlarge {
+  width: 32px;
+  height: 32px;
+  background-position: -384px 0;
+}
+.icon-enlarge2 {
+  width: 32px;
+  height: 32px;
+  background-position: -432px 0;
+}
+.icon-lock {
+  width: 32px;
+  height: 32px;
+  background-position: -480px 0;
+}
+.icon-unlocked {
+  width: 32px;
+  height: 32px;
+  background-position: -528px 0;
+}
+.icon-equalizer {
+  width: 32px;
+  height: 32px;
+  background-position: -576px 0;
+}
+.icon-equalizer2 {
+  width: 32px;
+  height: 32px;
+  background-position: -624px 0;
+}
+.icon-cog {
+  width: 32px;
+  height: 32px;
+  background-position: -672px 0;
+}
+.icon-pie-chart {
+  width: 32px;
+  height: 32px;
+  background-position: -720px 0;
+}
+.icon-stats-dots {
+  width: 32px;
+  height: 32px;
+  background-position: 0 -48px;
+}
+.icon-stats-bars {
+  width: 32px;
+  height: 32px;
+  background-position: -48px -48px;
+}
+.icon-stats-bars2 {
+  width: 32px;
+  height: 32px;
+  background-position: -96px -48px;
+}
+.icon-meter2 {
+  width: 32px;
+  height: 32px;
+  background-position: -144px -48px;
+}
+.icon-fire {
+  width: 32px;
+  height: 32px;
+  background-position: -192px -48px;
+}
+.icon-bin2 {
+  width: 32px;
+  height: 32px;
+  background-position: -240px -48px;
+}
+.icon-switch {
+  width: 32px;
+  height: 32px;
+  background-position: -288px -48px;
+}
+.icon-list {
+  width: 32px;
+  height: 32px;
+  background-position: -336px -48px;
+}
+.icon-tree {
+  width: 32px;
+  height: 32px;
+  background-position: -384px -48px;
+}
+.icon-menu2 {
+  width: 44px;
+  height: 32px;
+  background-position: -432px -48px;
+}
+.icon-link {
+  width: 32px;
+  height: 32px;
+  background-position: -528px -48px;
+}
+.icon-flag {
+  width: 32px;
+  height: 32px;
+  background-position: -576px -48px;
+}
+.icon-bookmark {
+  width: 32px;
+  height: 32px;
+  background-position: -624px -48px;
+}
+.icon-bookmarks {
+  width: 32px;
+  height: 32px;
+  background-position: -672px -48px;
+}
+.icon-star-full {
+  width: 32px;
+  height: 32px;
+  background-position: -720px -48px;
+}
+.icon-warning {
+  width: 32px;
+  height: 32px;
+  background-position: 0 -96px;
+}
+.icon-notification {
+  width: 32px;
+  height: 32px;
+  background-position: -48px -96px;
+}
+.icon-cross {
+  width: 32px;
+  height: 32px;
+  background-position: -96px -96px;
+}
+.icon-checkmark {
+  width: 32px;
+  height: 32px;
+  background-position: -144px -96px;
+}
+.icon-checkmark2 {
+  width: 32px;
+  height: 32px;
+  background-position: -192px -96px;
+}
+.icon-sort-amount-asc {
+  width: 32px;
+  height: 32px;
+  background-position: -240px -96px;
+}
+.icon-checkbox-checked {
+  width: 32px;
+  height: 32px;
+  background-position: -288px -96px;
+}
+.icon-checkbox-unchecked {
+  width: 32px;
+  height: 32px;
+  background-position: -336px -96px;
+}
+.icon-filter {
+  width: 32px;
+  height: 32px;
+  background-position: -384px -96px;
+}
+.icon-sigma {
+  width: 32px;
+  height: 32px;
+  background-position: -432px -96px;
+}
+.icon-share2 {
+  width: 32px;
+  height: 32px;
+  background-position: -480px -96px;
+}
+.icon-github {
+  width: 32px;
+  height: 32px;
+  background-position: -528px -96px;
+}
+.icon-users {
+  width: 36px;
+  height: 32px;
+  background-position: -576px -96px;
+}
+.icon-wrench {
+  width: 32px;
+  height: 32px;
+  background-position: -624px -96px;
+}
+.icon-hammer {
+  width: 32px;
+  height: 32px;
+  background-position: -672px -96px;
+}
+.icon-star-empty {
+  width: 32px;
+  height: 32px;
+  background-position: -720px -96px;
+}
+.icon-star-full2 {
+  width: 32px;
+  height: 32px;
+  background-position: 0 -144px;
+}
+.icon-embed {
+  width: 32px;
+  height: 32px;
+  background-position: -48px -144px;
+}
+.icon-embed2 {
+  width: 40px;
+  height: 32px;
+  background-position: -96px -144px;
+}
+

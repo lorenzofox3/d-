@@ -6,9 +6,15 @@ export default flexible((props, {grid, actions}) => {
   const {x, y, onResizeStart, onMoveStart} = props;
   const panelData = grid.getData(x, y);
 
-  const onClick = _ => {
-    actions.openModal({x, y, title: 'Create new data panel', modalType: 'createPanelData'});
+  const createSmartList = _ => {
+    actions.openModal({x, y, title: 'Create new data panel', modalType: 'createSmartListPanelData'});
   };
 
-  return <EmptyDataPanel {...panelData} onMoveStart={onMoveStart} onClick={onClick} onResizeStart={onResizeStart}/>;
+  const createSmartChart = _ => {
+    actions.openModal({x, y, title: 'Create new Chart data panel', modalType: 'createSmartChartPanelData'})
+  };
+
+  return <EmptyDataPanel {...panelData} onMoveStart={onMoveStart} createSmartList={createSmartList}
+                         createSmartChart={createSmartChart}
+                         onResizeStart={onResizeStart}/>;
 });

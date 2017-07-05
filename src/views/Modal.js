@@ -1,9 +1,10 @@
 import {h} from 'flaco';
+import {Cross} from '../components/icons';
 
-export default props => {
+const modal = Comp => props => {
   const {isOpen, closeModal, title} = props;
   const onKeyDown = ({code}) => {
-    if(code === 'Escape'){
+    if (code === 'Escape') {
       closeModal();
     }
   };
@@ -11,8 +12,11 @@ export default props => {
   return (<div aria-hidden={String(!isOpen)} onKeyDown={onKeyDown} class="modal">
     <header>
       <h2>{title}</h2>
-      <button onClick={closeModal}>X</button>
+      <button onClick={closeModal}><Cross></Cross></button>
     </header>
-    {props.children}
+    <div class="blurry-background"></div>
+    <Comp {...props}/>
   </div>)
 };
+
+export default modal;

@@ -37,7 +37,7 @@ export default (grid = Grid()) => (state = {active: null, panels: [...grid]}, ac
         panels: [...grid]
       });
     } else {
-      return Object.assign(state, {active: Object.assign({}.active, {valid: false})});
+      return Object.assign(state, {active: Object.assign({}, active, {valid: false})});
     }
   };
 
@@ -151,7 +151,6 @@ export default (grid = Grid()) => (state = {active: null, panels: [...grid]}, ac
       });
     }
     case 'UPDATE_PANEL_DATA': {
-      //todo remove dataConf of hidden panels ?
       const {x, y, data} = action;
       grid.updateAt(x, y, {data});
       return Object.assign({}, state, {panels: [...grid]});
@@ -159,7 +158,6 @@ export default (grid = Grid()) => (state = {active: null, panels: [...grid]}, ac
     case 'RESET_PANEL': {
       const {x, y} = action;
       grid.updateAt(x, y, {data: {}});
-
       return Object.assign({}, state, {panels: [...grid]});
     }
     default:

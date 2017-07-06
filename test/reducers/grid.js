@@ -1,6 +1,6 @@
 import zora from 'zora';
-import {Grid} from '../src/lib/grid';
-import reducer from '../src/reducers/grid';
+import {Grid} from '../../src/lib/grid';
+import reducer from '../../src/reducers/grid';
 
 export default zora()
   .test('Start resize', function * (t) {
@@ -146,4 +146,4 @@ export default zora()
       ]
     });
   })
-// todo
+//todo

@@ -1,27 +1,19 @@
-import {h} from 'flaco';
+import {h, onMount, onUpdate} from 'flaco';
+import {compose} from 'smart-table-operators';
+import {ROWS, COLUMNS} from '../lib/constants';
 
-export default (props) => {
-  //todo destruct with rest {...otherProps} instead of deleting stuffs
-  const {dx = 1, dy = 1, x, y, panelClasses, children, style = ''} = props;
-  delete props.children;
-  delete props.panelClasses;
-  delete props.dx;
-  delete props.dy;
-  delete props.x;
-  delete props.y;
-  delete props.style;
+const setCustomProperties = vnode => {
+  const {props, dom} = vnode;
+  const {x, y, dx, dy, z} = (props || {});
+  if (dom) {
+    dom.style.setProperty('--grid-column-offset', x);
+    dom.style.setProperty('--grid-row-offset', y);
+    dom.style.setProperty('--grid-column-span', dx);
+    dom.style.setProperty('--grid-row-span', dy);
+    if (z) {
+      dom.style.setProperty('z-index', z);
+    }
+  }
+};
 
-  const positionStyle = `
-    --grid-column-offset: ${x};
-    --grid-row-offset: ${y};
-    --grid-row-span: ${dy};
-    --grid-column-span: ${dx};
-    ${style}
-`;
-
-  const classes = ['panel'].concat(panelClasses).join(' ');
-
-  return (<div {...props} style={positionStyle} class={classes}>
-    {children}
-  </div>);
-}
+export default compose(onMount(setCustomProperties), onUpdate(setCustomProperties));

@@ -11,9 +11,9 @@ export default (props) => {
     <div>
       <p>{message}</p>
       <div>
-        <button onClick={confirm}> Confirm</button>
-        <button onClick={closeModal}> Cancel</button>
+        <button onClick={confirm}>Confirm</button>
+        <button onClick={closeModal}>Cancel</button>
       </div>
     </div>);
-  return <Comp title="Attention !" {...props} />
+  return Comp({title: 'Attention !', ...props});
 };

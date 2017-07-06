@@ -6,7 +6,10 @@ import {Tree, StarFull, Notification, Users, Embed2} from '../components/icons';
 const autofocus = onMount((vnode) => {
   vnode.dom.focus();
 });
-const AutofocusInput = autofocus(props => <input {...props} />);
+const AutofocusInput = autofocus(props => {
+  delete props.children;
+  return <input {...props} />
+});
 const statefullModal = compose(withState, modal);
 
 const SourceTypeSelect = props => {
@@ -73,7 +76,7 @@ export const CreateSmartListForm = (props) => {
 
 export const CreateSmartChartForm = props => {
   const {onSubmit, onUpdate} = props;
-  return (<div class="modal-content">
+  return <div class="modal-content">
     <form onSubmit={onSubmit}>
       <label>
         <span>Panel title:</span>
@@ -81,31 +84,21 @@ export const CreateSmartChartForm = props => {
       </label>
       <button>Create</button>
     </form>
-  </div>);
+  </div>;
 };
 
-export const CreateSmartListDataPanel = props => {
-  const UpdatableFormSection = statefullModal((props, update) => {
-    const {data} = props;
-    const onUpdate = (val) => {
-      Object.assign(data, val);
-      update({data, ...props});
-    };
-    return CreateSmartListForm({onUpdate, ...props});
-  });
-  return UpdatableFormSection(props);
-};
-
-export const CreateSmartChartDataPanel = props => {
-  const UpdatableFormSection = statefullModal((props, update) => {
+const modalForm = Comp => props => {
+  const UdpatableComp = statefullModal((props, update) => {
     const {data} = props;
     const onUpdate = val => {
       Object.assign(data, val);
       update({data, ...props});
     };
-    return CreateSmartChartForm({onUpdate, ...props})
+    return Comp({onUpdate, ...props});
   });
-
-  return UpdatableFormSection(props);
+  return UdpatableComp(props);
 };
+
+export const CreateSmartListDataPanel = modalForm(CreateSmartListForm);
+export const CreateSmartChartDataPanel = modalForm(CreateSmartChartForm)
 

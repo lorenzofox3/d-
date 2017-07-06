@@ -1,10 +1,12 @@
 import zora from 'zora';
-import grid from './grid';
-import actions from './actions';
-import gridReducer from './gridReducer';
+import libs from './lib/index';
+import actions from './actions/index';
+import reducers from './reducers/index';
+import views from './views/index';
 
 zora()
-  .test(grid)
+  .test(libs)
   .test(actions)
-  .test(gridReducer)
+  .test(reducers)
+  .test(views)
   .run();

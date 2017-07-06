@@ -22,7 +22,7 @@ const syncRegistries = (store) => next => action => {
       sl.remove();
     }
   } else if (type === 'END_MOVE') {
-    const {grid:{active}} = store.getState();
+    const {grid: {active}} = store.getState();
     if (active.valid === true) {
       const oldSl = smartListRegistry.find(startX, startY);
       const newSl = smartListRegistry.find(x, y);
@@ -38,9 +38,4 @@ const syncRegistries = (store) => next => action => {
   return next(action);
 };
 
-export default createStore(reducer(grid), initialState,
-  compose(
-    applyMiddleware(syncRegistries),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
-);
+export default createStore(reducer(grid), initialState, applyMiddleware(syncRegistries));

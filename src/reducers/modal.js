@@ -1,6 +1,6 @@
 export default (grid) => (state = {isOpen: false}, action) => {
-  const {type, title, modalType, x, y} = action;
-  const modalData = Object.assign({}, action);
+  const {type} = action;
+  const modalData = {...action};
   delete  modalData.type;
   switch (type) {
     case 'OPEN_MODAL': {

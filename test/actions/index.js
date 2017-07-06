@@ -1,5 +1,5 @@
 import zora from 'zora';
-import * as actions from '../src/actions';
+import * as actions from '../../src/actions';
 
 export default zora()
   .test('resizeOver should be defined', function * (t) {

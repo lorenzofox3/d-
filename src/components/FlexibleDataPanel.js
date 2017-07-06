@@ -14,6 +14,6 @@ export default (Comp) => (props, services) => {
     actions.startMove({x, y});
   };
 
-  return Comp(Object.assign(props, {onResizeStart, onMoveStart}), services);
+  return Comp({onResizeStart, onMoveStart, ...props}, services);
 };
 

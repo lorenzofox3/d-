@@ -1,18 +1,18 @@
 import {h} from 'flaco';
-import Panel from './Panel';
+import panel from './Panel';
 import {ROWS, COLUMNS} from '../lib/constants'
 import {Enlarge, Enlarge2} from '../components/icons';
 
-const flexible = Comp => (props) => {
-  const {x, y, dx, dy, adornerStatus, onResizeStart, onMoveStart} = props;
-  const zIndex = (ROWS - y) * 10 + COLUMNS - x;
-  const panelClasses = ['data-panel'];
+export default Comp => panel((props) => {
+  const {x, y, dx = 1, dy = 1, adornerStatus, onResizeStart, onMoveStart} = props;
+  const z = (ROWS - y) * 10 + COLUMNS - x;
+  const panelClasses = ['panel', 'data-panel'];
 
   if (adornerStatus !== 0) {
     panelClasses.push('active-panel');
   }
 
-  return <Panel x={x} y={y} dx={dx} dy={dy} style={`z-index:${zIndex};`} panelClasses={panelClasses}>
+  return (<div x={x} y={y} dx={dx} dy={dy} z={z} class={panelClasses.join(' ')}>
     <div class="move-handle" draggable="true" onDragStart={onMoveStart}>
       <Enlarge/>
     </div>
@@ -20,7 +20,5 @@ const flexible = Comp => (props) => {
     <div class="resize-handle" draggable="true" onDragStart={onResizeStart}>
       <Enlarge2/>
     </div>
-  </Panel>
-};
-
-export default flexible;
+  </div>);
+});

@@ -15,7 +15,7 @@ for (let icon of fs.readdirSync(inputFolder)) {
     .map(word => word.charAt(0).toUpperCase() + word.substr(1, word.length - 1))
     .join('');
   const content = fs.readFileSync(path.join(inputFolder, icon));
-  transformer.svgToJsx(content, {removeTitle: true})
+  transformer.toJsx(content, {removeTitle: true})
     .then(svg => {
       const component = `
 export const ${ComponentName} = (props) => {

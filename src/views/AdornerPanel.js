@@ -1,13 +1,12 @@
 import {h} from 'flaco'
-import Panel from '../views/Panel';
+import panel from '../views/Panel';
 
-export default ({x, y, adornerStatus}) => {
-  const extraClasses = [];
+export default panel(({x, y, adornerStatus}) => {
+  const classes = ['panel'];
   if (adornerStatus === 1) {
-    extraClasses.push('valid-panel');
+    classes.push('valid-panel');
   } else if (adornerStatus === -1) {
-    extraClasses.push('invalid-panel');
+    classes.push('invalid-panel');
   }
-
-  return <Panel panelClasses={extraClasses} x={x} y={y} dx={1} dy={1}></Panel>;
-};
+  return <div class={classes.join(' ')} x={x} y={y} dx={1} dy={1}></div>;
+});

@@ -1,11 +1,11 @@
 import {h} from 'flaco';
-import {CreateSmartListModal, CreateSmartChartModal} from './EditPanelDataModal';
+import {CreateSmartListModal, CreateSmartAggregationModal, CreateSmartChartModal} from './EditPanelDataModal';
 import ConfirmationModal from './ConfirmationModal';
 import {default as ModalView}  from '../views/Modal';
 
 
 export const EmptyModal = ModalView((props) => {
-    return <div></div>;
+  return <div></div>;
 });
 
 const getModalComponent = (modalType) => {
@@ -14,6 +14,8 @@ const getModalComponent = (modalType) => {
       return CreateSmartListModal;
     case 'createSmartChartPanelData':
       return CreateSmartChartModal;
+    case 'createSmartAggregationPanelData':
+      return CreateSmartAggregationModal;
     case 'askConfirmation':
       return ConfirmationModal;
     default:

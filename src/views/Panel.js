@@ -1,6 +1,5 @@
 import {h, onMount, onUpdate} from 'flaco';
 import {compose} from 'smart-table-operators';
-import {ROWS, COLUMNS} from '../lib/constants';
 
 const setCustomProperties = vnode => {
   const {props, dom} = vnode;

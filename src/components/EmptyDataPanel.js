@@ -14,7 +14,13 @@ export default flexible((props, {grid, actions}) => {
     actions.openModal({x, y, title: 'Create new Chart data panel', modalType: 'createSmartChartPanelData'})
   };
 
+  const createSmartAggregation = _ => {
+    actions.openModal({x, y, title: 'Create new aggregation data panel', modalType: 'createSmartAggregationPanelData'});
+  };
+
   return <EmptyDataPanel {...panelData} onMoveStart={onMoveStart} createSmartList={createSmartList}
                          createSmartChart={createSmartChart}
-                         onResizeStart={onResizeStart}/>;
+                         onResizeStart={onResizeStart}
+                         createSmartAggregation={createSmartAggregation}
+  />;
 });

@@ -1,4 +1,4 @@
-const actionCreator = actionName => opts => (Object.assign({type: actionName}, opts))
+const actionCreator = actionName => opts => ({type: actionName, ...opts});
 
 export const dragOver = actionCreator('DRAG_OVER');
 export const endResize = actionCreator('END_RESIZE');

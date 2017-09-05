@@ -1,7 +1,6 @@
 import {IssuesList} from '../views/Issues'
 import {h} from 'flaco';
 
-
 export default (props) => {
   const {smartList, items =[], data={}} = props;
   const {showToolBar} = data;

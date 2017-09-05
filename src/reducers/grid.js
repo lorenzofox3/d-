@@ -133,7 +133,7 @@ export default (grid = Grid()) => (state = {active: null, panels: [...grid]}, ac
         const startData = grid.getData(startX, startY);
         const {dx, dy} =startData;
         const claimedArea = grid.area(x, y, dx, dy);
-        for ({x: cx, y: cy} of claimedArea) {
+        for (let {x: cx, y: cy} of claimedArea) {
           const newX = cx + deltaX;
           const newY = cy + deltaY;
           const newData = Object.assign(grid.getData(cx, cy), {x: newX, y: newY});

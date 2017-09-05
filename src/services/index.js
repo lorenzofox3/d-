@@ -4,7 +4,6 @@ import smartLists from './smartListRegistry';
 import store from './store';
 import {connect} from 'flaco';
 
-
 export default {
   actions,
   grid,

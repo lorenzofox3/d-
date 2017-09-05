@@ -5,8 +5,6 @@
      */
 
     --transition-duration: 0.3s;
-    --grid-gap-row: 0.4em;
-    --grid-gap-column: 0.4em;
 
     --highlight-color: #ff9500;
     --link-color: #698ae6;
@@ -23,7 +21,7 @@
 
     --button-theme: var(--link-color);
     --button-shadow: var(--gray);
-    --button-background: inhert;
+    --button-background: inherit;
 
     /*
     functional
@@ -99,6 +97,11 @@ button:active {
     transform: scale(0.8, 0.8);
 }
 
+p {
+    margin: 1.5rem 0;
+    line-height: 1.5;
+}
+
 .icon {
     display: flex;
 }
@@ -153,13 +156,13 @@ GRID
 }
 
 .adorner-layer {
-    padding: calc(var(--grid-gap-row) / 2) calc(var(--grid-gap-column) / 2);
+    padding: 0.2em 0.2em;
 }
 
 .data-layer {
     z-index: 2;
-    padding: var(--grid-gap-row) var(--grid-gap-column);
-    grid-gap: var(--grid-gap-row) var(--grid-gap-column);
+    padding: 0.4em 0.4em;
+    grid-gap: 0.4em 0.4em;
 }
 
 /**
@@ -347,10 +350,14 @@ aside {
     height: 100%;
     z-index: 500;
     display: grid;
-    grid-template-rows: min-content 1fr;
+    grid-template-rows: min-content;
     color: var(--lighter-gray);
     border-left: 1px solid var(--black);
     box-shadow: 2px 0 10px 2px var(--black);
+}
+
+.modal button:hover, .modal button:focus {
+    --button-theme: var(--highlight-color);
 }
 
 .blurry-background {
@@ -381,6 +388,8 @@ aside {
 
 .modal-content {
     padding: 0.5em;
+    display: flex;
+    flex-direction: column;
 }
 
 .modal[aria-hidden=true] {
@@ -396,14 +405,42 @@ aside {
 FORM
  */
 
-form, label, fieldset {
+fieldset {
     display: flex;
     flex-direction: column;
     margin: 0.5em 0;
+    padding: 0.5em 0.7em;
 }
 
-fieldset {
-    padding: 0.1em 0.7em;
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.form-buttons {
+    display: flex;
+    padding: 0.5em;
+}
+
+.form-buttons button {
+    padding: 0.3em;
+    margin: 0 0.3em;
+    font-size: 1.2rem;
+    min-width: 6em;
+    display: flex;
+    justify-content: center;
+}
+
+.form-content {
+    flex-grow: 1;
+}
+
+label {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
 }
 
 fieldset > div {
@@ -461,14 +498,37 @@ input[type=radio]:checked + div {
     color: var(--highlight-color);
 }
 
-input[type=radio]:focus + div, input[type=radio]:hover + div {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px 0 var(--highlight-color);
-}
-
 input:focus, select:focus {
     background: var(--highlight-color);
     color: var(--white);
+}
+
+.focus-adorner {
+    position: relative;
+}
+
+.focus-adorner:after {
+    display: inline-block;
+    position: absolute;
+    height: 1px;
+    background: currentColor;
+    content: '';
+    left: 50%;
+    right: 50%;
+    bottom: calc(0.2em * (-0.4));
+}
+
+label > .focus-adorner {
+    margin-bottom: 0.4em;
+}
+
+input:focus + .focus-adorner:after,
+input[type=radio]:focus + div > .focus-adorner:after,
+label:hover .focus-adorner:after,
+button:focus > .focus-adorner:after, button:hover > .focus-adorner:after {
+    left: 0;
+    right: 0;
+    transition: left var(--transition-duration), right var(--transition-duration);
 }
 
 /*
@@ -646,6 +706,14 @@ UI-KIT
 [aria-hidden=true] {
     display: none;
 }
+
+/**
+FOCUS ADORNER
+ */
+
+/**
+END FOCUS ADORNER
+ */
 
 @keyframes show-in {
     0% {

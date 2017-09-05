@@ -9,7 +9,7 @@ export default (state = [], action) => {
       const {x, y, tableState, items} = action;
       return state.map((sl) => {
         if (sl.x === x && sl.y === y) {
-          return Object.assign({}, sl, {tableState, items});
+          return {...sl, tableState, items};
         } else {
           return sl;
         }

@@ -5,21 +5,18 @@ jobs:
       - image: circleci/node:8.4.0
     steps:
       - checkout
-      - run:
-          name: add-yarn
-          command: 'sudo npm install -g yarn'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: install
-          command: yarn
+          command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
       - run:
           name: bundle
-          command: yarn run build:prod
+          command: npm run build:prod
 #      - run:
 #          name: test
 #          command: npm test

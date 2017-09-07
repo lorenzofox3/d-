@@ -10,6 +10,9 @@ export default {
     node({jsnext: true}),
     buble({
       jsx: 'h',
+      transforms: {
+        async: false
+      },
       target: {chrome: 52},
       objectAssign: 'Object.assign'
     }),

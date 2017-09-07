@@ -1,6 +1,9 @@
 version: 2
 jobs:
   build:
+    branches:
+      only:
+        - master
     docker:
       - image: circleci/node:8.4.0
     steps:
@@ -17,6 +20,9 @@ jobs:
       - run:
           name: bundle
           command: npm run build:prod
-#      - run:
-#          name: test
-#          command: npm test
+      - deploy:
+          command: |
+            GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+            gsutil cp -r dist gs://static.dashgithub.com
+
+

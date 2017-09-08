@@ -10,8 +10,8 @@ const bucket = storage.bucket('static.dashgithub.com');
 const distWalker = walk.walk('./dist');
 
 distWalker.on('file', function (root, fileStats, next) {
-  const rels = root.split('./');
-  const r = rels.slice(2).join('/');
+  const rels = root.split('/');
+  const r = rels.slice(2).join('/'); //remove ./dist
   const {name} = fileStats;
   bucket.upload(path.join(root, name), {
     public: true,

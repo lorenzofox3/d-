@@ -17,7 +17,7 @@ distWalker.on('file', function (root, fileStats, next) {
   bucket.upload(path.join(root, name), {
     public: true,
     destination
-  }, function (err, res) {
+  }, function (err) {
     if (err) {
       throw err;
     }

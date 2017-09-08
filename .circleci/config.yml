@@ -8,6 +8,9 @@ jobs:
       - image: circleci/node:8.4.0
     steps:
       - checkout
+      - run:
+        name: install gcloud
+        command:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
@@ -23,6 +26,6 @@ jobs:
       - deploy:
           command: |
             echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
-            gsutil cp -r dist gs://static.dashgithub.com
+            node run upload
 
 

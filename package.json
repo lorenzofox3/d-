@@ -14,11 +14,13 @@
     "build:css": "cp ./src/theme/theme.css ./dist/theme/theme.css",
     "build:prod": "npm run prebuild && npm run build:icons && rollup -c ./rollup.prod.js && npm run build:css && cp ./src/theme/theme.css ./dist/theme/theme.css && cp ./src/index.html ./dist/index.html",
     "build:clean": "rimraf ./dist",
-    "prebuild": "npm run build:clean && mkdirp ./dist/theme"
+    "prebuild": "npm run build:clean && mkdirp ./dist/theme",
+    "upload": "node ./sripts/uploadToBucket.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@google-cloud/storage": "^1.2.1",
     "@mapbox/svg-react-transformer": "^0.7.0",
     "mkdirp": "^0.5.1",
     "postcss": "^6.0.6",

@@ -8,9 +8,6 @@ jobs:
       - image: circleci/node:8.4.0
     steps:
       - checkout
-      - run:
-        name: install gcloud
-        command:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:

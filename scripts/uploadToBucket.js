@@ -6,11 +6,14 @@ const storage = gcs({
   keyFilename: path.resolve(process.env.HOME, './gcloud-service-key.json')
 });
 
+const bucket = storage.bucket('static.dashgithub.com');
 
-storage.getBuckets(function (err, buckets) {
+bucket.upload('./dist/index.html',{
+  public:true,
+  dest:'./index.html'
+}, function  (err, res) {
   if(err){
     throw err;
   }
-  console.log(buckets);
+  console.log(res);
 });
-

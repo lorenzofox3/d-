@@ -13,9 +13,11 @@ distWalker.on('file', function (root, fileStats, next) {
   const rels = root.split('/');
   const r = rels.slice(2).join('/'); //remove ./dist
   const {name} = fileStats;
+  const dest = '/' + path.join(r, name);
+  console.log(dest);
   bucket.upload(path.join(root, name), {
     public: true,
-    dest: path.join(r, name)
+    dest
   }, function (err, res) {
     if (err) {
       throw err;
